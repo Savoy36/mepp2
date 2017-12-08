@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 
 import Login from './src/components/Login/Login';
 import CreateAccount from './src/components/CreateAccount/CreateAccount'; 
+import recipeSettings from './src/components/recipeSettings/recipeSettings';
 
 const Routes = {
   Login: {
@@ -18,6 +19,10 @@ const Routes = {
   CreateAccount: {
     name: 'Sign Up',
     screen: CreateAccount, 
+  },
+  recipeSettings: {
+    name: 'Selection Settings',
+    screen: recipeSettings,
   },
 };
 

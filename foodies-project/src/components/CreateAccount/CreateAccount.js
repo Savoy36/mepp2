@@ -116,7 +116,7 @@ CreateAccount.navigationOptions = {
 
 
 const CreateAccountScreen = StackNavigator({
-	CreateAccout: {
+	CreateAccount: {
 		screen: CreateAccount,
 	},
 	Login: {

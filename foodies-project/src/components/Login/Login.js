@@ -5,6 +5,7 @@ import { StyleSheet, Text, TextInput, View, Image, KeyboardAvoidingView, Touchab
 import { StackNavigator, SafeAreaView } from 'react-navigation';
 
 import VerifyLogin from './VerifyLogin'; 
+import recipeSettings from '../../components/recipeSettings/recipeSettings';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA45vMMLm17hnDg33BCOFuLX-w96MZnU3Y",
@@ -24,47 +25,70 @@ function createUser(username, name, email, password) {//write user data
   });
 }
 
-const Login = ({ navigation }) => (
+export default class Login extends React.Component {
+  
+constructor(){
+  super()
   this.state={
     username: '',
     password: '',
     found: true
-  },
+  };
+  this.userExists=this.userExists.bind(this)
+  this.verifyPass=this.verifyPass.bind(this)
+}
+
 userExistsCallback = (exists) => {
   if (exists) {
-    alert('user ' + this.state.username + ' exists!');
+    alert('user ' + this.state.username + ' exists!')
   } else {
-    alert('user ' + this.state.username + ' does not exist!');
+    alert('user ' + this.state.username + ' does not exist!')
   }
-},
+}
 verifyPassCallback = (passMatch) => {
   if (passMatch) {
-    alert('Successfully Logged In!');
+    alert('Successfully Logged In!')
+    navigate('recipeSettings', { username: this.state.username })
   } else {
-    alert('Password Is Incorrect!');
+    alert('Password Is Incorrect!')
   }
-},
-userExists = () => {
-  usersRef = firebase.database().ref('users');
+}
+userExists = (user) => {
+  usersRef = firebase.database().ref('users')
   //usersRef = new firebase(USERS_LOCATION);
   usersRef.child(this.state.username).once('value', function(snapshot) {
     exists = (snapshot.val() !== null);
-    userExistsCallback(exists);
+    //this.userExistsCallback(exists);
+    if (exists) {
+    alert('user ' + user + ' exists!')
+  } else {
+    alert('user ' + user + ' does not exist!')
+  }
   });
-},
-verifyPass = () => {
+}
+verifyPass = (user, pass, navigate) => {
   passRef = firebase.database().ref('users/' + this.state.username + '/password').once('value').then(function(snapshot) {
-  passMatch = (snapshot.val() == this.state.password);
-  verifyPassCallback(passMatch);
+  passMatch = (snapshot.val() == pass);
+  //verifyPassCallback(passMatch);
+  if (passMatch) {
+    alert('Successfully Logged In!')
+    navigate('recipeSettings', {username: user})
+  } else {
+    alert('Password Is Incorrect!')
+  }
   });
-},
+}
+render() {
+    const { navigate } = this.props.navigation;
+    const { goBack } = this.props.navigation;
+  return(
   <KeyboardAvoidingView behavior="padding" style={styles.container}>
     
     <View>
       <TouchableOpacity 
         style={styles.goBackButton}
           //Standard 'go back button function'
-          onPress={() => navigation.goBack(null)}>
+          onPress={() => goBack()}>
           <Text style={styles.goBackButtonText}>Back</Text>          
       </TouchableOpacity>
     </View>  
@@ -110,8 +134,8 @@ verifyPass = () => {
           //Alec: pass text input params to DB here, still could 
           //not figure out how to do this. 
           onPress={() => {//navigation.navigate('VerifyLogin')
-              userExists()
-              verifyPass()
+              this.userExists(this.state.username)
+              this.verifyPass(this.state.username, this.state.password, navigate)
             }
           }>
           <Text style={styles.loginButtonText}>LOGIN</Text>
@@ -120,8 +144,9 @@ verifyPass = () => {
     </View>
   </View>    
   </KeyboardAvoidingView>
-
-);
+    )
+  }
+}
 
 
 
@@ -131,6 +156,9 @@ const LoginScreen = StackNavigator({
     },
     VerifyLogin: {
       screen: VerifyLogin,
+    },
+    recipeSettings: {
+      screen: recipeSettings,
     },
   },
     {
@@ -190,4 +218,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default LoginScreen; 
+//export default LoginScreen; 
