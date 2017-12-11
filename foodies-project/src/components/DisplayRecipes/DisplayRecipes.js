@@ -1,11 +1,11 @@
 import React from 'react'; 
 import * as firebase from 'firebase'; 
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Button } from 'react-native'; 
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, ScrollView, Button } from 'react-native'; 
 import { StackNavigator, SafeAreaView } from 'react-navigation'; 
 
 import one from './Recipes/one/';
 import two from './Recipes/two/';
-/*import three from './Recipes/three/';
+/* port three from './Recipes/three/';
 import four from './Recipes/four/';
 import five from './Recipes/five/';
 import six from './Recipes/six/';
@@ -19,12 +19,19 @@ import thirteen from './Recipes/thirteen/';
 import fourteen from './Recipes/fourteen/';
 */
 const DisplayRecipes = ({ navigation }) => (
+	<View style={styles.TitleHeader}>
+		<Text style={styles.TitleText}>Recipes:</Text>
+		
+	
 	<ScrollView style={{ flex: 1 }} contentInsetAdjustmentBehavior="automatic">
+
 		<TouchableOpacity onPress={() => navigation.navigate("one")}>
 			<View style={styles.item}>
 				<Text style={styles.itemText}>Cajun Chicken Pasta</Text>
 			</View>
 		</TouchableOpacity>
+
+		<View style={styles.separator}></View>
 
 		<TouchableOpacity onPress={() => navigation.navigate("two")}>
 			<View style={styles.item}>
@@ -32,7 +39,64 @@ const DisplayRecipes = ({ navigation }) => (
 			</View>
 		</TouchableOpacity>
 
+		<View style={styles.separator}></View>
+
+		<TouchableOpacity>
+			<View style={styles.item}>
+				<Text style={styles.itemText}>Easy Lasagna II</Text>
+			</View>
+		</TouchableOpacity>
+
+		<View style={styles.separator}></View>
+
+		<TouchableOpacity>
+			<View style={styles.item}>
+				<Text style={styles.itemText}>Hamburger Cheese Bake</Text>
+			</View>
+		</TouchableOpacity>
+
+		<View style={styles.separator}></View>
+
+		<TouchableOpacity>
+			<View style={styles.item}>
+				<Text style={styles.itemText}>Mom's Spaghetti Sauce</Text>
+			</View>
+		</TouchableOpacity>
+
+		<View style={styles.separator}></View>
+
+		<TouchableOpacity>
+			<View style={styles.item}>
+				<Text style={styles.itemText}>California Primavera</Text>
+			</View>
+		</TouchableOpacity>
+
+		<View style={styles.separator}></View>
+
+		<TouchableOpacity>
+			<View style={styles.item}>
+				<Text style={styles.itemText}>Layered Egg Noodle Bake</Text>
+			</View>
+		</TouchableOpacity>
+
+		<View style={styles.separator}></View>
+
+		<TouchableOpacity>
+			<View style={styles.item}>
+				<Text style={styles.itemText}>Fettuccini Alfredo</Text>
+			</View>
+		</TouchableOpacity>
+
+		<View style={styles.separator}></View>
+
+		<TouchableOpacity>
+			<View style={styles.item}>
+				<Text style={styles.itemText}>Asian Carryout Noodles</Text>
+			</View>
+		</TouchableOpacity>	
+
 	</ScrollView>
+	</View>
 ); 
 
 
@@ -54,6 +118,14 @@ const DisplayRecipesScreen = StackNavigator({
 ); 
 
 const styles = StyleSheet.create({
+	TitleHeader: {
+		flex: 1,
+		paddingTop: 20,
+	},
+	TitleText: {
+		marginLeft: 10,
+		fontSize: 28,
+	},
 	container: {
 		flex: 1,
 		paddingTop: 22 
@@ -69,12 +141,17 @@ const styles = StyleSheet.create({
 	    fontSize: 16
 	 },
 	item: {
+		marginLeft: 40,
 		padding: 10, 
 		height: 44,
 	},
+	foodImageStyle: {
+		height: 65,
+		width: 65,
+	},
 	itemText: {
 		marginLeft: 12,
-		fontSize: 18,
+		fontSize: 22,
 	},
 	separator: {
 	    flex: 1,
