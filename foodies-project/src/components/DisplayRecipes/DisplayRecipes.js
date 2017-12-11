@@ -22,8 +22,8 @@ const DisplayRecipes = ({ navigation }) => (
 	<View style={styles.TitleHeader}>
 		<Text style={styles.TitleText}>Recipes:</Text>
 		
-	
-	<ScrollView style={{ flex: 1 }} contentInsetAdjustmentBehavior="automatic">
+		
+		<ScrollView style={{ flex: 1 }} contentInsetAdjustmentBehavior="automatic">
 
 		<TouchableOpacity onPress={() => navigation.navigate("one")}>
 			<View style={styles.item}>
@@ -95,6 +95,9 @@ const DisplayRecipes = ({ navigation }) => (
 			</View>
 		</TouchableOpacity>	
 
+		<View style={styles.separator}></View>
+
+
 	</ScrollView>
 	</View>
 ); 
@@ -141,7 +144,7 @@ const styles = StyleSheet.create({
 	    fontSize: 16
 	 },
 	item: {
-		marginLeft: 40,
+		marginLeft: 10,
 		padding: 10, 
 		height: 44,
 	},
