@@ -10,6 +10,9 @@ import * as firebase from 'firebase';
 import Login from './src/components/Login/Login';
 import CreateAccount from './src/components/CreateAccount/CreateAccount'; 
 import recipeSettings from './src/components/recipeSettings/recipeSettings';
+import DisplayRecipes from './src/components/DisplayRecipes/DisplayRecipes'; 
+
+
 
 const Routes = {
   Login: {
@@ -24,6 +27,10 @@ const Routes = {
     name: 'Selection Settings',
     screen: recipeSettings,
   },
+  DisplayRecipes: {
+    name: 'Browse Recipes', 
+    screen: DisplayRecipes,
+  }
 };
 
 
@@ -81,7 +88,7 @@ const AppNavigator = StackNavigator(
 
 const styles = StyleSheet.create({
   titleStyle: {
-    marginTop: 15,
+    marginTop: 25,
     marginBottom: 250,
     color: 'black',
     fontSize: 64,
@@ -101,7 +108,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     // backgroundColor: '#1E824C',
     backgroundColor: '#60AFFE',
-    marginBottom: 20, 
+    marginBottom: 10, 
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius:5,

@@ -6,6 +6,7 @@ import { StackNavigator, SafeAreaView } from 'react-navigation';
 
 import VerifyLogin from './VerifyLogin'; 
 import recipeSettings from '../../components/recipeSettings/recipeSettings';
+import DisplayRecipes from '../../components/DisplayRecipes/DisplayRecipes'; 
 
 const firebaseConfig = {
   apiKey: "AIzaSyA45vMMLm17hnDg33BCOFuLX-w96MZnU3Y",
@@ -15,7 +16,8 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-var database = firebase.database();
+
+const database = firebase.database();
 
 function createUser(username, name, email, password) {//write user data
   firebase.database().ref('users/' + username).set({
@@ -80,7 +82,7 @@ verifyPass = (user, pass, navigate) => {
 }
 render() {
     const { navigate } = this.props.navigation;
-    const { goBack } = this.props.navigation;
+    const { goBack } = this.props.navigation; 
   return(
   <KeyboardAvoidingView behavior="padding" style={styles.container}>
     
@@ -91,6 +93,13 @@ render() {
           onPress={() => goBack()}>
           <Text style={styles.goBackButtonText}>Back</Text>          
       </TouchableOpacity>
+      
+      <TouchableOpacity 
+          style={styles.skipButton}
+          onPress={() => navigate(DisplayRecipes)}>
+          <Text style={styles.skipButtonText}>Skip</Text>          
+      </TouchableOpacity>
+   
     </View>  
 
     <View style={styles.logoContainer}>
@@ -144,9 +153,10 @@ render() {
     </View>
   </View>    
   </KeyboardAvoidingView>
-    )
+    );
   }
 }
+
 
 
 
@@ -160,6 +170,9 @@ const LoginScreen = StackNavigator({
     recipeSettings: {
       screen: recipeSettings,
     },
+    DisplayRecipes: {
+      screen: DisplayRecipes,
+    }, 
   },
     {
       headerMode: 'none',
@@ -181,41 +194,51 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     fontSize: 16
   },
+  skipButton: { 
+     alignItems: 'flex-end', 
+     marginTop: 15, 
+     marginBottom: 10, 
+     paddingRight: 15
+  },
+  skipButtonText: {
+      color: '#013243',
+      fontWeight: '100',
+      fontSize: 16
+  },
   logoContainer: {
-	alignItems: 'center',
-	flexGrow: 2,
-	justifyContent: 'center'
+  	alignItems: 'center',
+  	flexGrow: 2,
+  	justifyContent: 'center'
   },
   logo: {
-	 flexGrow:2,
-	 width: 280,
-	 height: 150,
+  	 flexGrow:2,
+  	 width: 280,
+  	 height: 150,
   },
   title: {
-	color: '#000',
-	marginTop: 10
+  	color: '#000',
+  	marginTop: 10
   },
   formContainerTwo: {
     padding: 60
   },
   input: {
-  height: 40,
-  backgroundColor: 'rgba(255,255,255,0.4)',
-  marginBottom: 20,
-  color: 'black',
-  paddingHorizontal: 10
+    height: 40,
+    backgroundColor: 'rgba(255,255,255,0.4)',
+    marginBottom: 20,
+    color: 'black',
+    paddingHorizontal: 10
   },
   loginButtonContainer: {
-  backgroundColor: '#52B3D9',
-  paddingVertical: 10
+    backgroundColor: '#52B3D9',
+    paddingVertical: 10
   },
   loginButtonText: {
-  textAlign: 'center',
-  color: 'black',
-  fontWeight: '700'
+    textAlign: 'center',
+    color: 'black',
+    fontWeight: '700'
   }, 
 
 });
-
 
 //export default LoginScreen; 
